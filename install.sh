@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # This script will install the Android SDK and NDK, and tell Uno where they are found.
-# Note: JDK8 is required to install the Android SDK.
+# Note that Java 8 (not 9) is required to install Android SDK.
 
 SDK_VERSION="4333796"
 
@@ -10,7 +10,13 @@ SELF=`echo $0 | sed 's/\\\\/\\//g'`
 cd "`dirname "$SELF"`" || exit 1
 
 function fatal-error {
-    echo -e "\nERROR: Install failed -- please read output for clues, and try reinstalling."
+    echo -e "\nERROR: Install failed -- please read output for clues, or open an issue on GitHub." >&2
+    echo -e "\nNote that Java 8 (not 9) is required to install Android SDK." >&2
+    echo -e "\nTo retry, run:" >&2
+    echo -e "    bash \"`pwd -P`/install.sh\"" >&2
+    echo -e "\nOr, try a full reinstall:" >&2
+    echo -e "    npm uninstall uno-android-build-tools -g" >&2
+    echo -e "    npm install uno-android-build-tools -g\n" >&2
     exit 1
 }
 
