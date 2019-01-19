@@ -1,6 +1,6 @@
 {
   "name": "uno-android-build-tools",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Android SDK and NDK installer for Uno and Fuse apps.",
   "scripts": {
     "install": "bash install.sh"
