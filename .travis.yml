@@ -1,0 +1,6 @@
+os:
+  - linux
+  - osx
+
+script:
+  - npm install
