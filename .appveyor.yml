@@ -1,0 +1,12 @@
+version: '{build}'
+
+install:
+  - npm install
+
+build_script:
+  - npm pack --silent
+
+artifacts:
+  - path: '*.tgz'
+
+test: off
