@@ -78,6 +78,9 @@ function get-zip {
 SDK_DIR="android-sdk"
 get-zip $SDK_URL $SDK_DIR
 
+# Avoid warning from sdkmanager
+touch ~/.android/repositories.cfg
+
 # Install packages
 function sdkmanager {
     if [ "$IS_WINDOWS" = 1 ]; then
