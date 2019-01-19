@@ -79,6 +79,7 @@ SDK_DIR="android-sdk"
 get-zip $SDK_URL $SDK_DIR
 
 # Avoid warning from sdkmanager
+mkdir -p ~/.android
 touch ~/.android/repositories.cfg
 
 # Install packages
