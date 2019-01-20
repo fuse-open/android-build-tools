@@ -97,18 +97,24 @@ function sdkmanager {
 echo "Accepting licenses"
 yes | sdkmanager --licenses > /dev/null
 
-echo "Installing NDK"
-yes | sdkmanager ndk-bundle > /dev/null
+function sdkmanager-install {
+    if [ -d android-sdk/$1 ]; then
+        echo "Have $1 -- skipping install"
+    else
+        echo "Installing $1"
+        yes | sdkmanager $2 > /dev/null
+    fi
+}
 
-echo "Installing CMake"
-yes | sdkmanager "cmake;3.6.4111459" > /dev/null
+sdkmanager-install ndk-bundle ndk-bundle
+sdkmanager-install cmake "cmake;3.6.4111459"
 
 # Emit config file for Uno
 echo "Android.SDK.Directory: $SDK_DIR" > .unoconfig
 echo "Android.NDK.Directory: $SDK_DIR/ndk-bundle" >> .unoconfig
 
 if [ -n "$JAVA_HOME" ]; then
-    echo "Java.JDK.Directory: \"$JAVA_HOME\"" >> .unoconfig
+    echo "Java.JDK.Directory: \`$JAVA_HOME\`" >> .unoconfig
 fi
 
 echo -e "\nSaved config:"
