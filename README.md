@@ -18,7 +18,3 @@ Please note that [Java 8 (not 9) is required to install Android SDK](https://sta
 ## Contributing
 
 Please [report an issue](https://github.com/mortend/uno-android-build-tools/issues) if you encounter a problem, or [open a PR](https://github.com/mortend/uno-android-build-tools/pulls) if you make a patch.
-
-## License
-
-MIT
