@@ -110,3 +110,6 @@ echo "Android.NDK.Directory: $SDK_DIR/ndk-bundle" >> .unoconfig
 if [ -n "$JAVA_HOME" ]; then
     echo "Java.JDK.Directory: \"$JAVA_HOME\"" >> .unoconfig
 fi
+
+echo -e "\nSaved config:"
+cat .unoconfig
