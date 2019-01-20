@@ -109,3 +109,7 @@ yes | sdkmanager "cmake;3.6.4111459" > /dev/null
 # Emit config file for Uno
 echo "Android.SDK.Directory: $SDK_DIR" > .unoconfig
 echo "Android.NDK.Directory: $SDK_DIR/ndk-bundle" >> .unoconfig
+
+if [ -n "$JAVA_HOME" ]; then
+    echo "Java.JDK.Directory: \"$JAVA_HOME\"" >> .unoconfig
+fi
