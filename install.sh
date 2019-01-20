@@ -61,21 +61,19 @@ function get-zip {
     url=$1
     dir=$2
     zip=$2.zip
+    rm -rf $zip
 
     if [ -d $dir ]; then
         echo "Have $dir -- skipping download"
         return
     fi
 
-    if [ -f $zip ]; then
-        echo "Have $zip -- skipping download"
-    else
-        echo "Downloading $url"
-        curl -s -L $url -o $zip
-    fi
+    echo "Downloading $url"
+    curl -s -L $url -o $zip
 
     echo "Extracting to $dir"
     unzip -q $zip -d $dir
+    rm -rf $zip
 }
 
 SDK_DIR="android-sdk"
