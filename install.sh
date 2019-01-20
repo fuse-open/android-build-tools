@@ -23,12 +23,15 @@ trap 'fatal-error' ERR
 case "$(uname -s)" in
 Darwin)
     SDK_URL=https://dl.google.com/android/repository/sdk-tools-darwin-$SDK_VERSION.zip
+    SDK_DIR=~/Library/Android/sdk
     ;;
 Linux)
     SDK_URL=https://dl.google.com/android/repository/sdk-tools-linux-$SDK_VERSION.zip
+    SDK_DIR=~/Android/sdk
     ;;
 CYGWIN*|MINGW*|MSYS*)
     SDK_URL=https://dl.google.com/android/repository/sdk-tools-windows-$SDK_VERSION.zip
+    SDK_DIR=$LOCALAPPDATA/Android/sdk
     IS_WINDOWS=1
     ;;
 *)
@@ -60,7 +63,7 @@ fi
 function get-zip {
     url=$1
     dir=$2
-    zip=$2.zip
+    zip=`basename $2`.zip
     rm -rf $zip
 
     if [ -d $dir ]; then
@@ -72,11 +75,11 @@ function get-zip {
     curl -s -L $url -o $zip
 
     echo "Extracting to $dir"
+    mkdir -p $dir
     unzip -q $zip -d $dir
     rm -rf $zip
 }
 
-SDK_DIR="android-sdk"
 get-zip $SDK_URL $SDK_DIR
 
 # Avoid warning from sdkmanager
@@ -108,8 +111,9 @@ sdkmanager-install ndk-bundle ndk-bundle
 sdkmanager-install cmake "cmake;3.6.4111459"
 
 # Emit config file for Uno
-echo "Android.SDK.Directory: $SDK_DIR" > .unoconfig
-echo "Android.NDK.Directory: $SDK_DIR/ndk-bundle" >> .unoconfig
+# Backticks in .unoconfig can handle unescaped backslashes in Windows paths.
+echo "Android.SDK.Directory: \`$SDK_DIR\`" > .unoconfig
+echo "Android.NDK.Directory: \`$SDK_DIR/ndk-bundle\`" >> .unoconfig
 
 if [ -n "$JAVA_HOME" ]; then
     echo "Java.JDK.Directory: \`$JAVA_HOME\`" >> .unoconfig
