@@ -72,11 +72,11 @@ function get-zip {
     fi
 
     echo "Downloading $url"
-    curl -s -L $url -o $zip
+    curl -s -L $url -o $zip || fatal-error
 
     echo "Extracting to $dir"
     mkdir -p $dir
-    unzip -q $zip -d $dir
+    unzip -q $zip -d $dir || fatal-error
     rm -rf $zip
 }
 
