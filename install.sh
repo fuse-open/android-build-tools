@@ -13,10 +13,7 @@ function fatal-error {
     echo -e "\nERROR: Install failed -- please read output for clues, or open an issue on GitHub." >&2
     echo -e "\nNote that Java 8 (not 9) is required to install Android SDK." >&2
     echo -e "\nTo retry, run:" >&2
-    echo -e "    bash \"`pwd -P`/install.sh\"" >&2
-    echo -e "\nOr, try a full reinstall:" >&2
-    echo -e "    npm uninstall uno-android-build-tools -g" >&2
-    echo -e "    npm install uno-android-build-tools -g\n" >&2
+    echo -e "\n    bash \"`pwd -P`/install.sh\"\n" >&2
     exit 1
 }
 
