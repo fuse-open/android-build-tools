@@ -7,6 +7,8 @@
 
 Android SDK and NDK installer for Uno and Fuse apps, suitable for installing on Linux, macOS and Windows (64-bit).
 
+Visit [Fuse Open](https://fuseopen.com/) for more information about Uno and Fuse.
+
 ## Install
 
 ```
