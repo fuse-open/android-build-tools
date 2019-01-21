@@ -11,7 +11,7 @@ cd "`dirname "$SELF"`" || exit 1
 
 function fatal-error {
     echo -e "\nERROR: Install failed -- please read output for clues, or open an issue on GitHub." >&2
-    echo -e "\nNote that Java 8 (not 9) is required to install Android SDK." >&2
+    echo -e "\nNote that Java 8 (not 9+) is required to install Android SDK." >&2
     echo -e "\nTo retry, run:" >&2
     echo -e "\n    bash \"`pwd -P`/install.sh\"\n" >&2
     exit 1
@@ -27,7 +27,7 @@ Darwin)
     ;;
 Linux)
     SDK_URL=https://dl.google.com/android/repository/sdk-tools-linux-$SDK_VERSION.zip
-    SDK_DIR=~/Android/sdk
+    SDK_DIR=~/Android/Sdk
     ;;
 CYGWIN*|MINGW*|MSYS*)
     SDK_URL=https://dl.google.com/android/repository/sdk-tools-windows-$SDK_VERSION.zip
