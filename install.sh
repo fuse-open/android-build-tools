@@ -63,24 +63,24 @@ fi
 function get-zip {
     url=$1
     dir=$2
-    zip=`basename $2`.zip
-    rm -rf $zip
+    zip=`basename "$2"`.zip
+    rm -rf "$zip"
 
-    if [ -d $dir ]; then
+    if [ -d "$dir" ]; then
         echo "Have $dir -- skipping download"
         return
     fi
 
     echo "Downloading $url"
-    curl -s -L $url -o $zip || fatal-error
+    curl -s -L "$url" -o "$zip" || fatal-error
 
     echo "Extracting to $dir"
-    mkdir -p $dir
-    unzip -q $zip -d $dir || fatal-error
-    rm -rf $zip
+    mkdir -p "$dir"
+    unzip -q "$zip" -d "$dir" || fatal-error
+    rm -rf "$zip"
 }
 
-get-zip $SDK_URL $SDK_DIR
+get-zip "$SDK_URL" "$SDK_DIR"
 
 # Avoid warning from sdkmanager
 mkdir -p ~/.android
@@ -89,9 +89,9 @@ touch ~/.android/repositories.cfg
 # Install packages
 function sdkmanager {
     if [ "$IS_WINDOWS" = 1 ]; then
-        $SDK_DIR/tools/bin/sdkmanager.bat "$@"
+        "$SDK_DIR/tools/bin/sdkmanager.bat" "$@"
     else
-        $SDK_DIR/tools/bin/sdkmanager "$@"
+        "$SDK_DIR/tools/bin/sdkmanager" "$@"
     fi
 }
 
@@ -99,10 +99,10 @@ echo "Accepting licenses"
 yes | sdkmanager --licenses > /dev/null
 
 function sdkmanager-install {
-    if [ -d android-sdk/$1 ]; then
+    if [ -d "$SDK_DIR/$1" ]; then
         echo "Have $1 -- skipping install"
     else
-        echo "Installing $1"
+        echo "Installing $2"
         yes | sdkmanager $2 > /dev/null
     fi
 }
