@@ -1,5 +1,5 @@
 {
-  "name": "uno-android-build-tools",
+  "name": "android-build-tools",
   "version": "0.2.0",
   "description": "Android SDK and NDK installer for Uno and Fuse apps.",
   "scripts": {
@@ -10,7 +10,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mortend/uno-android-build-tools.git"
+    "url": "git+https://github.com/mortend/android-build-tools.git"
   },
   "keywords": [
     "android",
@@ -22,7 +22,7 @@
   "author": "Morten Daniel Fornes",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mortend/uno-android-build-tools/issues"
+    "url": "https://github.com/mortend/android-build-tools/issues"
   },
-  "homepage": "https://github.com/mortend/uno-android-build-tools#readme"
+  "homepage": "https://github.com/mortend/android-build-tools#readme"
 }
