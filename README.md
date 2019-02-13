@@ -1,6 +1,6 @@
 # Android build tools installer
 
-[![AppVeyor build status](https://img.shields.io/appveyor/ci/mortend/android-build-tools/master.svg?logo=appveyor&style=flat-square)](https://ci.appveyor.com/project/mortend/android-build-tools/branch/master)
+[![AppVeyor build status](https://img.shields.io/appveyor/ci/mortend/android-build-tools/master.svg?logo=appveyor&logoColor=silver&style=flat-square)](https://ci.appveyor.com/project/mortend/android-build-tools/branch/master)
 [![Travis CI build status](https://img.shields.io/travis/mortend/android-build-tools/master.svg?style=flat-square)](https://travis-ci.org/mortend/android-build-tools)
 [![NPM package](https://img.shields.io/npm/v/android-build-tools.svg?style=flat-square)](https://www.npmjs.com/package/android-build-tools)
 [![License: MIT](https://img.shields.io/github/license/fuse-open/uno.svg?style=flat-square)](LICENSE)
