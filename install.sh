@@ -29,7 +29,7 @@ Linux)
     ;;
 CYGWIN*|MINGW*|MSYS*)
     SDK_URL=https://dl.google.com/android/repository/sdk-tools-windows-$SDK_VERSION.zip
-    SDK_DIR=$LOCALAPPDATA/Android/sdk
+    SDK_DIR=$LOCALAPPDATA\\Android\\sdk
     IS_WINDOWS=1
     ;;
 *)
@@ -38,14 +38,24 @@ CYGWIN*|MINGW*|MSYS*)
     ;;
 esac
 
+function native-path {
+    if [ "$IS_WINDOWS" = 1 ]; then
+        echo `echo $1 | sed 's/\\//\\\\/g'`
+    else
+        echo $1
+    fi
+}
+
+NDK_DIR=`native-path $SDK_DIR/ndk-bundle`
+
 # Detect JAVA_HOME on Windows
 if [[ "$IS_WINDOWS" = 1 && -z "$JAVA_HOME" ]]; then
-    root=$PROGRAMFILES/Java
+    root=$PROGRAMFILES\\Java
 
     IFS=$'\n'
     for dir in `ls -1 "$root"`; do
         if [[ "$dir" == jdk1.8.* ]]; then
-            export JAVA_HOME=$root/$dir
+            export JAVA_HOME=$root\\$dir
             echo "Found JDK8 at $JAVA_HOME"
             break
         fi
@@ -111,7 +121,7 @@ sdkmanager-install cmake "cmake;3.6.4111459"
 # Emit config file for Uno
 # Backticks in .unoconfig can handle unescaped backslashes in Windows paths.
 echo "Android.SDK.Directory: \`$SDK_DIR\`" > .unoconfig
-echo "Android.NDK.Directory: \`$SDK_DIR/ndk-bundle\`" >> .unoconfig
+echo "Android.NDK.Directory: \`$NDK_DIR\`" >> .unoconfig
 
 if [ -n "$JAVA_HOME" ]; then
     echo "Java.JDK.Directory: \`$JAVA_HOME\`" >> .unoconfig
