@@ -127,5 +127,6 @@ if [ -n "$JAVA_HOME" ]; then
     echo "Java.JDK.Directory: \`$JAVA_HOME\`" >> .unoconfig
 fi
 
-echo -e "\nSaved config:"
+echo -e "\n--- .unoconfig ----------------------------------------------------"
 cat .unoconfig
+echo      "-------------------------------------------------------------------"
