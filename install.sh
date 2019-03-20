@@ -107,16 +107,12 @@ echo "Accepting licenses"
 yes | sdkmanager --licenses > /dev/null
 
 function sdkmanager-install {
-    if [ -d "$SDK_DIR/$1" ]; then
-        echo "Have $1 -- skipping install"
-    else
-        echo "Installing $2"
-        yes | sdkmanager $2 > /dev/null
-    fi
+    echo "Installing $1"
+    yes | sdkmanager $1 > /dev/null
 }
 
-sdkmanager-install ndk-bundle ndk-bundle
-sdkmanager-install cmake "cmake;3.6.4111459"
+sdkmanager-install ndk-bundle
+sdkmanager-install "cmake;3.6.4111459"
 
 # Emit config file for Uno
 # Backticks in .unoconfig can handle unescaped backslashes in Windows paths.
