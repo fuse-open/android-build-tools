@@ -80,7 +80,7 @@ function get-zip {
     fi
 
     echo "Downloading $url"
-    curl -s -L "$url" -o "$zip" || fatal-error
+    curl -s -L "$url" -o "$zip" -S --retry 3 || fatal-error
 
     echo "Extracting to $dir"
     mkdir -p "$dir"
