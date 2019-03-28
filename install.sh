@@ -69,9 +69,9 @@ fi
 
 # Download SDK
 function get-zip {
-    url=$1
-    dir=$2
-    zip=`basename "$2"`.zip
+    local url=$1
+    local dir=$2
+    local zip=`basename "$2"`.zip
     rm -rf "$zip"
 
     if [ -d "$dir" ]; then
