@@ -50,20 +50,36 @@ NDK_DIR=`native-path $SDK_DIR/ndk-bundle`
 
 # Detect JAVA_HOME on Windows
 if [[ "$IS_WINDOWS" = 1 && -z "$JAVA_HOME" ]]; then
-    root=$PROGRAMFILES\\Java
-
     IFS=$'\n'
-    for dir in `ls -1 "$root"`; do
-        if [[ "$dir" == jdk1.8.* ]]; then
-            export JAVA_HOME=$root\\$dir
-            echo "Found JDK8 at $JAVA_HOME"
-            break
+    for exe in `where java.exe 2>&1`; do
+        if [ -f "$exe" ]; then
+            version=`"$exe" -version 2>&1 | grep 1.8.`
+            if [ -n "$version" ]; then
+                dir=`dirname "$exe"`
+                export JAVA_HOME=`dirname "$dir"`
+                break
+            fi
         fi
     done
 
     if [ -z "$JAVA_HOME" ]; then
-        echo "ERROR: The JAVA_HOME variable is not set, and JDK8 was not found in '$root'." >&2
-        fatal-error
+        root=$PROGRAMFILES\\Java
+
+        IFS=$'\n'
+        for dir in `ls -1 "$root"`; do
+            if [[ "$dir" == jdk1.8.* ]]; then
+                export JAVA_HOME=$root\\$dir
+                break
+            fi
+        done
+    fi
+
+    if [ -z "$JAVA_HOME" ]; then
+        echo -e "ERROR: The JAVA_HOME variable is not set, and JDK8 was not found in PATH or '$root'." >&2
+        echo -e "\nGet OpenJDK8 from https://adoptopenjdk.net/ and try again." >&2
+        exit 1
+    else
+        echo "Found JDK8 at $JAVA_HOME"
     fi
 fi
 
