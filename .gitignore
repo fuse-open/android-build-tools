@@ -1,4 +1,5 @@
 .unoconfig
+*.log
 *.tgz
 *.zip
 */

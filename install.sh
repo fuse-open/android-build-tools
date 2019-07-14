@@ -12,6 +12,7 @@ cd "`dirname "$SELF"`" || exit 1
 function fatal-error {
     echo -e "\nERROR: Install failed -- please read output for clues, or open an issue on GitHub." >&2
     echo -e "\nNote that Java 8 (not 9+) is required to install Android SDK." >&2
+    echo -e "\nPlease get OpenJDK8 from https://adoptopenjdk.net/ and try again." >&2
     exit 1
 }
 
@@ -76,7 +77,7 @@ if [[ "$IS_WINDOWS" = 1 && -z "$JAVA_HOME" ]]; then
 
     if [ -z "$JAVA_HOME" ]; then
         echo -e "ERROR: The JAVA_HOME variable is not set, and JDK8 was not found in PATH or '$root'." >&2
-        echo -e "\nGet OpenJDK8 from https://adoptopenjdk.net/ and try again." >&2
+        echo -e "\nPlease get OpenJDK8 from https://adoptopenjdk.net/ and try again." >&2
         exit 1
     else
         echo "Found JDK8 at $JAVA_HOME"
@@ -119,12 +120,20 @@ function sdkmanager {
     fi
 }
 
+function sdkmanager-silent {
+    yes | sdkmanager "$@" > sdkmanager.log
+    if [ $? != 0 ]; then
+        cat sdkmanager.log
+        fatal-error
+    fi
+}
+
 echo "Accepting licenses"
-yes | sdkmanager --licenses > /dev/null
+sdkmanager-silent --licenses
 
 function sdkmanager-install {
     echo "Installing $1"
-    yes | sdkmanager $1 > /dev/null
+    sdkmanager-silent $1
 }
 
 sdkmanager-install ndk-bundle
