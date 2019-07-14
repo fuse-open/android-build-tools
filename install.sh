@@ -51,7 +51,7 @@ NDK_DIR=`native-path $SDK_DIR/ndk-bundle`
 # Detect JAVA_HOME on Windows
 if [[ "$IS_WINDOWS" = 1 && -z "$JAVA_HOME" ]]; then
     IFS=$'\n'
-    for exe in `where java.exe 2>&1`; do
+    for exe in `where javac.exe 2>&1`; do
         if [ -f "$exe" ]; then
             version=`"$exe" -version 2>&1 | grep 1.8.`
             if [ -n "$version" ]; then
