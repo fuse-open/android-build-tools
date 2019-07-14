@@ -9,6 +9,7 @@
     "install": "node install.js"
   },
   "files": [
+    "install.js",
     "install.sh"
   ],
   "repository": {
