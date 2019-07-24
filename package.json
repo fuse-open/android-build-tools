@@ -3,13 +3,12 @@
   "version": "1.0.0-rc.2",
   "description": "Android SDK and NDK installer for Uno and Fuse apps.",
   "dependencies": {
-    "which": "^1.3.1"
+    "xbash": "^1.0.0"
   },
   "scripts": {
-    "install": "node install.js"
+    "install": "xbash install.sh"
   },
   "files": [
-    "install.js",
     "install.sh",
     "update-unoconfig.js"
   ],
