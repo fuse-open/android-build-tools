@@ -4,5 +4,8 @@ matrix:
 #    - os: osx
 #      osx_image: xcode9.2
 
+jdk:
+  - openjdk8
+
 script:
   - npm install
