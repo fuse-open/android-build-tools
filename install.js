@@ -22,7 +22,7 @@ function findBashForWindows() {
     }
 
     console.error('ERROR: Bash was not found. This can be solved by installing Git.')
-    console.error("\nGet Git from https://git-scm.com/downloads and try again.");
+    console.error("\nPlease get Git from https://git-scm.com/downloads and try again.");
     process.exit(1);
 }
 
