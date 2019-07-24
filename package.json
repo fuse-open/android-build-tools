@@ -10,7 +10,8 @@
   },
   "files": [
     "install.js",
-    "install.sh"
+    "install.sh",
+    "update-unoconfig.js"
   ],
   "repository": {
     "type": "git",
