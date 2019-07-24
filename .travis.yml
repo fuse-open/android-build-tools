@@ -8,4 +8,5 @@ jdk:
   - openjdk8
 
 script:
-  - npm install
+  - npm pack --silent
+  - npm install -g *.tgz

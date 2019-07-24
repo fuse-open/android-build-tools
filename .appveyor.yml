@@ -1,10 +1,8 @@
 version: '{build}'
 
-install:
-  - npm install
-
 build_script:
   - npm pack --silent
+  - bash -c "npm install -g *.tgz"
 
 artifacts:
   - path: '*.tgz'
