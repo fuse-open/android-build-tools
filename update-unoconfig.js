@@ -8,11 +8,11 @@ const filename = path.join(os.homedir(), '.unoconfig');
 
 for (let i = 0; i < args.length; i++) {
     const colon = args[i].indexOf(':');
-    obj[args[i].substring(0, colon)] = args[i].substring(colon + 1);
+    obj[args[i].substring(0, colon)] = args[i].substring(colon + 1).trim();
 }
 
 const lines = fs.existsSync(filename)
-    ? fs.readFileSync(filename, "utf8").split(/\n|\r\n/)
+    ? fs.readFileSync(filename, "utf8").trim().split(/\n|\r\n/)
     : [];
 
 for (key in obj) {

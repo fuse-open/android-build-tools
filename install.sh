@@ -146,9 +146,9 @@ sdkmanager-install "cmake;3.6.4111459"
 
 # Emit config file for Uno
 node update-unoconfig.js \
-    "Android.SDK.Directory:$SDK_DIR" \
-    "Android.NDK.Directory:$NDK_DIR" \
-    "Java.JDK.Directory:$JAVA_HOME"
+    "Android.SDK.Directory: $SDK_DIR" \
+    "Android.NDK.Directory: $NDK_DIR" \
+    "Java.JDK.Directory: $JAVA_HOME"
 
 echo -e "\n--- ~/.unoconfig --------------------------------------------------"
            cat ~/.unoconfig
