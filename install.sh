@@ -94,17 +94,15 @@ function get-zip {
     local url=$1
     local dir=$2
     local zip=`basename "$2"`.zip
-    rm -rf "$zip"
 
-    if [ -d "$dir" ]; then
-        echo "Have $dir -- skipping download"
+    if [ -f "$zip" ]; then
+        rm -rf "$dir" "$zip"
+    elif [ -d "$dir" ]; then
         return
     fi
 
     echo "Downloading $url"
-    curl -s -L "$url" -o "$zip" -S --retry 3 || download-error
-
-    echo "Extracting to $dir"
+    curl -# -L "$url" -o "$zip" -S --retry 3 || download-error
     mkdir -p "$dir"
     unzip -q "$zip" -d "$dir" || download-error
     rm -rf "$zip"
