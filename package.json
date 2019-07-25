@@ -3,7 +3,7 @@
   "version": "1.0.0-rc.3",
   "description": "Android SDK and NDK installer for Uno and Fuse apps.",
   "dependencies": {
-    "xbash": "^1.0.0"
+    "xbash": "^1.1.0"
   },
   "scripts": {
     "install": "xbash install.bash"
