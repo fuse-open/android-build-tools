@@ -9,7 +9,8 @@ SELF=`echo $0 | sed 's/\\\\/\\//g'`
 cd "`dirname "$SELF"`" || exit 1
 
 function fatal-error {
-    echo -e "\nERROR: Install failed -- please read output for clues, or open an issue on GitHub (https://github.com/mortend/android-build-tools/issues)." >&2
+    echo -e "\nERROR: Install failed." >&2
+    echo -e "\nPlease read output for clues, or open an issue on GitHub (https://github.com/mortend/android-build-tools/issues)." >&2
     echo -e "\nPlease note that JDK8 (not 9+) is required to install Android SDK. Get OpenJDK8 from https://adoptopenjdk.net/ and try again." >&2
     exit 1
 }
@@ -83,6 +84,12 @@ if [[ "$IS_WINDOWS" = 1 && -z "$JAVA_HOME" ]]; then
 fi
 
 # Download SDK
+function download-error {
+    echo -e "\nERROR: Download failed." >&2
+    echo -e "\nPlease try again later, or open an issue on GitHub (https://github.com/mortend/android-build-tools/issues)." >&2
+    exit 1
+}
+
 function get-zip {
     local url=$1
     local dir=$2
@@ -95,11 +102,11 @@ function get-zip {
     fi
 
     echo "Downloading $url"
-    curl -s -L "$url" -o "$zip" -S --retry 3 || fatal-error
+    curl -s -L "$url" -o "$zip" -S --retry 3 || download-error
 
     echo "Extracting to $dir"
     mkdir -p "$dir"
-    unzip -q "$zip" -d "$dir" || fatal-error
+    unzip -q "$zip" -d "$dir" || download-error
     rm -rf "$zip"
 }
 
