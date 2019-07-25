@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # This script will install the Android SDK and NDK, and tell Uno where they are found.
 
 SDK_VERSION="4333796"
