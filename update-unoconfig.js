@@ -1,13 +1,11 @@
 const fs = require('fs');
 const path = require('path');
+const os = require('os');
 const EOL = require('os').EOL;
 
 const obj = {};
 const args = process.argv.slice(2);
-const filename = path.join(path.sep == '\\'
-                                ? process.env.USERPROFILE
-                                : process.env.HOME,
-                            '.unoconfig');
+const filename = path.join(os.homedir(), '.unoconfig');
 
 for (let i = 0; i < args.length; i++) {
     const colon = args[i].indexOf(':');
