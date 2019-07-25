@@ -19,7 +19,7 @@ for (key in obj) {
     // Remove old instances of ${key}
     for (let i = 0; i < lines.length; i++)
         if (lines[i] && lines[i].startsWith(key + ':'))
-            lines.splice(i--);
+            lines.splice(i--, 1);
 
     // Add new ${key}
     if (obj[key] && obj[key].length)
