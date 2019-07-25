@@ -6,10 +6,10 @@
     "xbash": "^1.0.0"
   },
   "scripts": {
-    "install": "xbash install.sh"
+    "install": "xbash install.bash"
   },
   "files": [
-    "install.sh",
+    "install.bash",
     "update-unoconfig.js"
   ],
   "repository": {
