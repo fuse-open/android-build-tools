@@ -1,7 +1,6 @@
 const fs = require('fs');
 const path = require('path');
 const os = require('os');
-const EOL = require('os').EOL;
 
 const obj = {};
 const args = process.argv.slice(2);
@@ -33,7 +32,7 @@ for (key in obj) {
             lines.push(`${key}: ${obj[key]}`);
 }
 
-fs.writeFileSync(filename, lines.join(EOL).trim() + EOL);
+fs.writeFileSync(filename, lines.join(os.EOL).trim() + os.EOL);
 
 // Fallback (TODO: remove after Uno v1.13)
-fs.writeFileSync('.unoconfig', `require \`${filename}\`${EOL}`);
+fs.writeFileSync('.unoconfig', `require \`${filename}\`${os.EOL}`);
