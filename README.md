@@ -26,6 +26,8 @@ The SDK is installed to one of the locations below. The installer will only down
 | macOS    | `~/Library/Android/sdk`       |
 | Windows  | `%LOCALAPPDATA%\Android\sdk`  |
 
+On Windows, if the user name or `%LOCALAPPDATA%` contain non-ASCII characters, the SDK is installed to `%PROGRAMDATA%\Android\sdk` instead. This is because we get build errors if the SDK location contains non-ASCII characters.
+
 ## Contributing
 
 Please [report an issue](https://github.com/mortend/android-build-tools/issues) if you encounter a problem, or [open a pull request](https://github.com/mortend/android-build-tools/pulls) if you make a patch.

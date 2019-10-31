@@ -15,6 +15,11 @@ function fatal-error {
 
 trap 'fatal-error' ERR
 
+# https://stackoverflow.com/a/13596664
+nonascii() {
+    LANG=C grep --color=always '[^ -~]\+';
+}
+
 # Detect platform
 case "$(uname -s)" in
 Darwin)
@@ -29,6 +34,19 @@ CYGWIN*|MINGW*|MSYS*)
     SDK_URL=https://dl.google.com/android/repository/sdk-tools-windows-$SDK_VERSION.zip
     SDK_DIR=$LOCALAPPDATA\\Android\\sdk
     IS_WINDOWS=1
+
+    # We need a workaround for non-ASCII user names.
+    if [ -n "`echo "$SDK_DIR" | nonascii`" ]; then
+        echo -e "\nWARNING: Android SDK cannot be installed in $SDK_DIR, because the SDK location cannot contain non-ASCII characters." >&2
+        if [ -n "$PROGRAMDATA" ]; then
+            SDK_DIR=$PROGRAMDATA\\Android\\sdk
+        else
+            # We've seen $PROGRAMDATA being empty on some systems,
+            # so we need another fallback.
+            SDK_DIR=$SYSTEMDRIVE\\ProgramData\\Android\\sdk
+        fi
+        echo -e "\nChanging SDK location to $SDK_DIR." >&2
+    fi
     ;;
 *)
     echo "ERROR: Unsupported platform $(uname -s)" >&2
