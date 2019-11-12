@@ -106,6 +106,12 @@ function download-error {
     exit 1
 }
 
+function permission-error {
+    echo -e "\nERROR: Failed to create file or directory." >&2
+    echo -e "\nPlease make sure you have necessary permissions to write in '`dirname "$1"`'." >&2
+    exit 1
+}
+
 function get-zip {
     local url=$1
     local dir=$2
@@ -117,8 +123,10 @@ function get-zip {
         return
     fi
 
+    mkdir -p "$dir" || permission-error "$dir"
+    touch "$zip" || permission-error "$zip"
+
     echo "Downloading $url"
-    mkdir -p "$dir"
     curl -# -L "$url" -o "$zip" -S --retry 3 || download-error
     unzip -q "$zip" -d "$dir" || download-error
     rm -rf "$zip"
