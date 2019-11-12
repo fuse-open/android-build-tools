@@ -109,7 +109,7 @@ function download-error {
 function get-zip {
     local url=$1
     local dir=$2
-    local zip=`basename "$2"`.zip
+    local zip=$2.zip
 
     if [ -f "$zip" ]; then
         rm -rf "$dir" "$zip"
@@ -118,8 +118,8 @@ function get-zip {
     fi
 
     echo "Downloading $url"
-    curl -# -L "$url" -o "$zip" -S --retry 3 || download-error
     mkdir -p "$dir"
+    curl -# -L "$url" -o "$zip" -S --retry 3 || download-error
     unzip -q "$zip" -d "$dir" || download-error
     rm -rf "$zip"
 }
