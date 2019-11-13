@@ -16,8 +16,6 @@ Android SDK and NDK installer for Uno and Fuse apps<sup>[1][2]</sup>, suitable f
 npm install android-build-tools -g
 ```
 
-Please note that [JDK8](https://adoptopenjdk.net/) (not 9+) [is required](https://stackoverflow.com/questions/46402772/failed-to-install-android-sdk-java-lang-noclassdeffounderror-javax-xml-bind-a) to install Android SDK, and that `bash` is required to run the install script. Bash is included in [Git for Windows](https://git-scm.com/downloads).
-
 The SDK is installed to one of the locations below. The installer will only download the SDK or additional components when something is missing.
 
 | Host OS  | Location                      |
@@ -26,7 +24,13 @@ The SDK is installed to one of the locations below. The installer will only down
 | macOS    | `~/Library/Android/sdk`       |
 | Windows  | `%LOCALAPPDATA%\Android\sdk`  |
 
-* On Windows, if the user name or `%LOCALAPPDATA%` contain non-ASCII characters, the SDK is installed to `%PROGRAMDATA%\Android\sdk` instead. This is because we get build errors if the SDK location contains non-ASCII characters.
+### Remarks
+
+* Please note that [JDK8](https://adoptopenjdk.net/) (not 9+) [is required](https://stackoverflow.com/questions/46402772/failed-to-install-android-sdk-java-lang-noclassdeffounderror-javax-xml-bind-a) to install Android SDK, and that `bash` is required to run the install script. `bash` is included in [Git for Windows](https://git-scm.com/downloads).
+
+* On Windows, if your user name or `%LOCALAPPDATA%` contain non-ASCII characters, the SDK is installed to `%PROGRAMDATA%\Android\sdk` instead. This is because we get build errors if the SDK location contains non-ASCII characters.
+
+* If you're using Fuse SDK v1.12 or lower, you should install `android-build-tools@1.2.0` because later versions aren't compatible with older Fuse SDK releases.
 
 ## Contributing
 
