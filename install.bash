@@ -164,7 +164,7 @@ function sdkmanager-install {
 }
 
 sdkmanager-install ndk-bundle
-sdkmanager-install "cmake;3.6.4111459"
+sdkmanager-install cmake
 
 # Emit config file for Uno
 node update-unoconfig.js \
