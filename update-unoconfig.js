@@ -33,11 +33,3 @@ for (key in obj) {
 }
 
 fs.writeFileSync(filename, lines.join(os.EOL).trim() + os.EOL);
-
-// Fallback (TODO: remove after Uno v1.13)
-try {
-    fs.writeFileSync('.unoconfig', `require \`${filename}\`${os.EOL}`);
-} catch (e) {
-    console.error(`WARNING: ${e}`);
-    console.error('If using Uno v1.13 or greater, this warning can be safely ignored.');
-}
