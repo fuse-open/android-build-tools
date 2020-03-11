@@ -62,7 +62,7 @@ function native-path {
     fi
 }
 
-NDK_DIR=`native-path $SDK_DIR/ndk-bundle`
+NDK_DIR=`native-path $SDK_DIR/ndk/21.0.6113669`
 
 # Detect JAVA_HOME on Windows
 if [[ "$IS_WINDOWS" = 1 && -z "$JAVA_HOME" ]]; then
@@ -163,8 +163,8 @@ function sdkmanager-install {
     sdkmanager-silent $1
 }
 
-sdkmanager-install ndk-bundle
 sdkmanager-install "cmake;3.10.2.4988404"
+sdkmanager-install "ndk;21.0.6113669"
 
 # Emit config file for Uno
 node update-unoconfig.js \
