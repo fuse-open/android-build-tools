@@ -1,5 +1,8 @@
 version: '{build}'
 
+environment:
+  GRADLE_OPTS: -Dorg.gradle.daemon=false
+
 build_script:
   - npm pack --silent
   - bash -c "npm install -g *.tgz"
@@ -7,4 +10,6 @@ build_script:
 artifacts:
   - path: '*.tgz'
 
-test: off
+test_script:
+  - npm install fuse-sdk -g
+  - uno build android app

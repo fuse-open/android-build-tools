@@ -1,5 +1,7 @@
+.uno/
 .unoconfig
 *.log
 *.tgz
 *.zip
-*/
+build/
+node_modules/
