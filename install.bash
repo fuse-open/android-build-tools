@@ -153,8 +153,8 @@ function get-zip {
 get-zip "$SDK_URL" "$SDK_DIR"
 
 # Avoid warning from sdkmanager.
-mkdir -p ~/.android
-touch ~/.android/repositories.cfg
+mkdir -p ~/.android || :
+touch ~/.android/repositories.cfg || :
 
 # Install packages.
 function sdkmanager {
