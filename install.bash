@@ -123,6 +123,10 @@ function download-error {
 function permission-error {
     echo -e "\nERROR: Failed to create file or directory." >&2
     echo -e "\nPlease make sure you have necessary permissions to write in '`dirname "$1"`'." >&2
+    if [ "$IS_WINDOWS" != 1 ]; then
+        # Reset permissions.
+        echo -e "\n    sudo chown -R \"$(whoami)\" \"`dirname "$1"`\"\n" >&2
+    fi
     exit 1
 }
 
