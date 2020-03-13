@@ -4,7 +4,7 @@ CMAKE_VERSION="3.10.2.4988404"
 NDK_VERSION="21.0.6113669"
 SDK_VERSION="4333796"
 
-# Begin script
+# Begin script.
 SELF=`echo $0 | sed 's/\\\\/\\//g'`
 cd "`dirname "$SELF"`" || exit 1
 
@@ -22,7 +22,7 @@ nonascii() {
     LANG=C grep --color=always '[^ -~]\+';
 }
 
-# Detect platform
+# Detect platform.
 case "$(uname -s)" in
 Darwin)
     SDK_URL=https://dl.google.com/android/repository/sdk-tools-darwin-$SDK_VERSION.zip
@@ -66,7 +66,7 @@ function native-path {
 
 NDK_DIR=`native-path $SDK_DIR/ndk/$NDK_VERSION`
 
-# Detect JAVA_HOME on Windows
+# Detect JAVA_HOME on Windows.
 if [[ "$IS_WINDOWS" = 1 && -z "$JAVA_HOME" ]]; then
     android_studio_jre=$PROGRAMFILES\\Android\\Android\ Studio\\jre
     java_root=$PROGRAMFILES\\Java
@@ -113,7 +113,7 @@ if [[ "$IS_WINDOWS" = 1 && -z "$JAVA_HOME" ]]; then
     fi
 fi
 
-# Download SDK
+# Download SDK.
 function download-error {
     echo -e "\nERROR: Download failed." >&2
     echo -e "\nPlease try again later, or open an issue on GitHub (https://github.com/mortend/android-build-tools/issues)." >&2
@@ -148,11 +148,11 @@ function get-zip {
 
 get-zip "$SDK_URL" "$SDK_DIR"
 
-# Avoid warning from sdkmanager
+# Avoid warning from sdkmanager.
 mkdir -p ~/.android
 touch ~/.android/repositories.cfg
 
-# Install packages
+# Install packages.
 function sdkmanager {
     if [ "$IS_WINDOWS" = 1 ]; then
         "$SDK_DIR/tools/bin/sdkmanager.bat" "$@"
@@ -180,7 +180,7 @@ function sdkmanager-install {
 sdkmanager-install "cmake;$CMAKE_VERSION"
 sdkmanager-install "ndk;$NDK_VERSION"
 
-# Emit config file for Uno
+# Emit config file for Uno.
 node update-unoconfig.js \
     "Android.SDK.Directory: $SDK_DIR" \
     "Android.NDK.Directory: $NDK_DIR" \

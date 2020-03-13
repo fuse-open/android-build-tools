@@ -16,12 +16,12 @@ const lines = fs.existsSync(filename)
     : [];
 
 for (key in obj) {
-    // Remove old instances of ${key}
+    // Remove old instances of ${key}.
     for (let i = 0; i < lines.length; i++)
         if (lines[i] && lines[i].startsWith(key + ':'))
             lines.splice(i--, 1);
 
-    // Add new ${key}
+    // Add new ${key}.
     if (obj[key] && obj[key].length)
         if (obj[key].indexOf('\\') != -1)
             lines.push(`${key}: \`${obj[key]}\``);
