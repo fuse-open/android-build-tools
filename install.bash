@@ -68,32 +68,44 @@ NDK_DIR=`native-path $SDK_DIR/ndk/$NDK_VERSION`
 
 # Detect JAVA_HOME on Windows
 if [[ "$IS_WINDOWS" = 1 && -z "$JAVA_HOME" ]]; then
-    IFS=$'\n'
-    for exe in `where javac.exe 2>&1`; do
-        if [ -f "$exe" ]; then
-            version=`"$exe" -version 2>&1 | grep 1.8.`
-            if [ -n "$version" ]; then
-                dir=`dirname "$exe"`
-                export JAVA_HOME=`dirname "$dir"`
-                break
-            fi
-        fi
-    done
+    android_studio_jre=$PROGRAMFILES\\Android\\Android\ Studio\\jre
+    java_root=$PROGRAMFILES\\Java
 
+    # First, see if Android Studio has the JDK.
+    if [ -f "$android_studio_jre\\bin\\java.exe" ]; then
+        export JAVA_HOME=$android_studio_jre
+    fi
+
+    # Look for JDK in PATH.
     if [ -z "$JAVA_HOME" ]; then
-        root=$PROGRAMFILES\\Java
-
         IFS=$'\n'
-        for dir in `ls -1 "$root"`; do
+        for exe in `where javac.exe 2>&1`; do
+            if [ -f "$exe" ]; then
+                version=`"$exe" -version 2>&1 | grep 1.8.`
+                if [ -n "$version" ]; then
+                    dir=`dirname "$exe"`
+                    export JAVA_HOME=`dirname "$dir"`
+                    break
+                fi
+            fi
+        done
+    fi
+
+    # Look for JDK in Program Files.
+    if [ -z "$JAVA_HOME" ]; then
+        IFS=$'\n'
+        for dir in `ls -1 "$java_root"`; do
             if [[ "$dir" == jdk1.8.* ]]; then
-                export JAVA_HOME=$root\\$dir
+                export JAVA_HOME=$java_root\\$dir
                 break
             fi
         done
     fi
 
     if [ -z "$JAVA_HOME" ]; then
-        echo -e "ERROR: The JAVA_HOME variable is not set, and JDK8 was not found in PATH or '$root'." >&2
+        echo -e "ERROR: The JAVA_HOME variable is not set, and JDK8 was not found in PATH or in the following locations:" >&2
+        echo -e "    * $android_studio_jre" >&2
+        echo -e "    * $java_root" >&2
         echo -e "\nPlease get OpenJDK8 from https://adoptopenjdk.net/ and try again." >&2
         exit 1
     else
