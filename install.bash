@@ -113,6 +113,14 @@ if [[ "$IS_WINDOWS" = 1 && -z "$JAVA_HOME" ]]; then
     fi
 fi
 
+# Make sure HOME is defined before invoking sdkmanager.
+if [[ "$IS_WINDOWS" != 1 && -z "$HOME" ]]; then
+    echo -e "\nERROR: Your HOME variable is undefined." >&2
+    echo -e "\nIf you're running with 'sudo', try running again from your user account without 'sudo'." >&2
+    echo -e "\nMore information: http://npm.github.io/installation-setup-docs/installing/a-note-on-permissions.html.\n" >&2
+    exit 1
+fi
+
 # Download SDK.
 function download-error {
     echo -e "\nERROR: Download failed." >&2
