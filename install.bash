@@ -166,9 +166,9 @@ function sdkmanager {
 }
 
 function sdkmanager-silent {
-    yes | sdkmanager "$@" > sdkmanager.log
+    yes | sdkmanager "$@" > ~/.android/sdkmanager.log
     if [ $? != 0 ]; then
-        cat sdkmanager.log
+        cat ~/.android/sdkmanager.log
         fatal-error
     fi
 }
