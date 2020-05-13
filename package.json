@@ -6,11 +6,10 @@
     "xbash": "^1.4.1"
   },
   "scripts": {
-    "install": "xbash install.bash"
+    "install": "xbash src/install.bash"
   },
   "files": [
-    "install.bash",
-    "update-unoconfig.js"
+    "src/*"
   ],
   "repository": {
     "type": "git",
@@ -20,6 +19,7 @@
     "android",
     "sdk",
     "ndk",
+    "installer",
     "uno",
     "fuse"
   ],
