@@ -10,7 +10,7 @@ cd "`dirname "$SELF"`" || exit 1
 
 function fatal-error {
     echo -e "\nERROR: Install failed." >&2
-    echo -e "\nPlease read output for clues, or open an issue on GitHub (https://github.com/mortend/android-build-tools/issues)." >&2
+    echo -e "\nPlease read output for clues, or open an issue on GitHub (https://github.com/fuse-open/android-build-tools/issues)." >&2
     echo -e "\nPlease note that JDK8 (not 9+) is required to install Android SDK. Get OpenJDK8 from https://adoptopenjdk.net/ and try again." >&2
     exit 1
 }
@@ -144,7 +144,7 @@ fi
 # Download SDK.
 function download-error {
     echo -e "\nERROR: Download failed." >&2
-    echo -e "\nPlease try again later, or open an issue on GitHub (https://github.com/mortend/android-build-tools/issues)." >&2
+    echo -e "\nPlease try again later, or open an issue on GitHub (https://github.com/fuse-open/android-build-tools/issues)." >&2
     exit 1
 }
 

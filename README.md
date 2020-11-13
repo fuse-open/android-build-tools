@@ -43,4 +43,4 @@ The SDK is installed to one of the locations below. The installer will only down
 
 ## Contributing
 
-Please [report an issue](https://github.com/mortend/android-build-tools/issues) if you encounter a problem, or [open a pull request](https://github.com/mortend/android-build-tools/pulls) if you make a patch.
+Please [report an issue](https://github.com/fuse-open/android-build-tools/issues) if you encounter a problem, or [open a pull request](https://github.com/fuse-open/android-build-tools/pulls) if you make a patch.
