@@ -199,6 +199,15 @@ function sdkmanager-silent {
         cat ~/.android/sdkmanager.log
         fatal-error
     fi
+
+    # Verify that sdkmanager works (#9).
+    cat ~/.android/sdkmanager.log | grep java.lang.NoClassDefFoundErrors
+
+    if [ $? == 0 ]; then
+        echo -e "\nERROR: Incompatible JDK version detected." >&2
+        echo -e "\nPlease note that JDK8 (not 9+) is required to install Android SDK. Get OpenJDK8 from https://adoptopenjdk.net/ and try again." >&2
+        exit 1
+    fi
 }
 
 echo "Accepting licenses"
