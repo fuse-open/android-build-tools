@@ -13,7 +13,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mortend/android-build-tools.git"
+    "url": "git+https://github.com/fuse-open/android-build-tools.git"
   },
   "keywords": [
     "android",
@@ -26,7 +26,7 @@
   "author": "Morten Daniel Fornes",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mortend/android-build-tools/issues"
+    "url": "https://github.com/fuse-open/android-build-tools/issues"
   },
-  "homepage": "https://github.com/mortend/android-build-tools#readme"
+  "homepage": "https://github.com/fuse-open/android-build-tools#readme"
 }
