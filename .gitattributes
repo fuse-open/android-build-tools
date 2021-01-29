@@ -1,1 +1,4 @@
 * text=auto
+
+# Use LF line endings for bash files
+*.bash  lf
