@@ -6,5 +6,7 @@ matrix:
       osx_image: xcode9.3
 
 script:
+  - npm install
   - npm pack --silent
+  # Check that we are able to install our package.
   - npm install -g *.tgz

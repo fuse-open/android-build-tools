@@ -5,8 +5,12 @@
   "dependencies": {
     "xbash": "^1.6.0"
   },
+  "devDependencies": {
+    "crlf": "^1.1.1"
+  },
   "scripts": {
-    "install": "xbash src/install.bash"
+    "install": "xbash src/install.bash",
+    "prepack": "crlf --set=LF src/install.bash"
   },
   "files": [
     "src/*"
