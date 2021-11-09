@@ -2,7 +2,7 @@
 
 CMAKE_VERSION="3.10.2.4988404"
 NDK_VERSION="21.0.6113669"
-SDK_VERSION="4333796"
+TOOLS_VERSION="7583922"
 
 # Begin script.
 SELF=`echo $0 | sed 's/\\\\/\\//g'`
@@ -25,17 +25,17 @@ nonascii() {
 # Detect platform.
 case "$(uname -s)" in
 Darwin)
-    SDK_URL=https://dl.google.com/android/repository/sdk-tools-darwin-$SDK_VERSION.zip
+    TOOLS_URL=https://dl.google.com/android/repository/commandlinetools-mac-${TOOLS_VERSION}_latest.zip
     SDK_DIR=~/Library/Android/sdk
     IS_MAC=1
     ;;
 Linux)
-    SDK_URL=https://dl.google.com/android/repository/sdk-tools-linux-$SDK_VERSION.zip
+    TOOLS_URL=https://dl.google.com/android/repository/commandlinetools-linux-${TOOLS_VERSION}_latest.zip
     SDK_DIR=~/Android/Sdk
     IS_LINUX=1
     ;;
 CYGWIN*|MINGW*|MSYS*)
-    SDK_URL=https://dl.google.com/android/repository/sdk-tools-windows-$SDK_VERSION.zip
+    TOOLS_URL=https://dl.google.com/android/repository/commandlinetools-win-${TOOLS_VERSION}_latest.zip
     SDK_DIR=$LOCALAPPDATA\\Android\\sdk
     IS_WINDOWS=1
 
@@ -158,27 +158,33 @@ function permission-error {
     exit 1
 }
 
-function get-zip {
+function get-tools {
     local url=$1
-    local dir=$2
-    local zip=$2.zip
+    local dir=$2/cmdline-tools
+    local zip=$2/cmdline-tools.zip
 
     if [ -f "$zip" ]; then
         rm -rf "$dir" "$zip"
-    elif [ -d "$dir" ]; then
+    elif [[ -f "$dir/latest/bin/sdkmanager" || -f "$dir/latest/bin/sdkmanager.bat" ]]; then
         return
     fi
 
-    mkdir -p "$dir" || permission-error "$dir"
+    mkdir -p "$dir/temp" || permission-error "$dir/temp"
     touch "$zip" || permission-error "$zip"
 
     echo "Downloading $url"
     curl -# -L "$url" -o "$zip" -S --retry 3 || download-error
-    unzip -q "$zip" -d "$dir" || download-error
-    rm -rf "$zip"
+    unzip -q "$zip" -d "$dir/temp" || download-error
+
+    # Move tools to right location inside SDK
+    rm -rf "$dir/latest" || permission-error "$dir/latest"
+    mv "$dir/temp/cmdline-tools" "$dir/latest" || permission-error "$dir/latest"
+
+    # Clean up
+    rm -rf "$zip" "$dir/temp"
 }
 
-get-zip "$SDK_URL" "$SDK_DIR"
+get-tools "$TOOLS_URL" "$SDK_DIR"
 
 # Avoid warning from sdkmanager.
 mkdir -p ~/.android || :
@@ -187,9 +193,9 @@ touch ~/.android/repositories.cfg || :
 # Install packages.
 function sdkmanager {
     if [ "$IS_WINDOWS" = 1 ]; then
-        "$SDK_DIR/tools/bin/sdkmanager.bat" "$@"
+        "$SDK_DIR/cmdline-tools/latest/bin/sdkmanager.bat" "$@"
     else
-        "$SDK_DIR/tools/bin/sdkmanager" "$@"
+        "$SDK_DIR/cmdline-tools/latest/bin/sdkmanager" "$@"
     fi
 }
 
