@@ -11,7 +11,7 @@ cd "`dirname "$SELF"`" || exit 1
 function fatal-error {
     echo -e "\nERROR: Install failed." >&2
     echo -e "\nPlease read output for clues, or open an issue on GitHub (https://github.com/fuse-open/android-build-tools/issues)." >&2
-    echo -e "\nPlease note that JDK8 (not 9+) is required to install Android SDK. Get OpenJDK8 from https://adoptopenjdk.net/ and try again." >&2
+    echo -e "\nPlease note that JDK is required to install Android SDK. Get OpenJDK from https://adoptium.net/ and try again." >&2
     exit 1
 }
 
@@ -71,7 +71,8 @@ NDK_DIR=`native-path $SDK_DIR/ndk/$NDK_VERSION`
 # Detect JAVA_HOME on Windows.
 if [[ "$IS_WINDOWS" = 1 && -z "$JAVA_HOME" ]]; then
     android_studio_jre=$PROGRAMFILES\\Android\\Android\ Studio\\jre
-    java_root=$PROGRAMFILES\\Java
+    java_root1=$PROGRAMFILES\\Eclipse\ Adoptium
+    java_root2=$PROGRAMFILES\\Java
 
     # First, see if Android Studio has the JDK.
     if [ -f "$android_studio_jre\\bin\\java.exe" ]; then
@@ -83,35 +84,42 @@ if [[ "$IS_WINDOWS" = 1 && -z "$JAVA_HOME" ]]; then
         IFS=$'\n'
         for exe in `where javac.exe 2>&1`; do
             if [ -f "$exe" ]; then
-                version=`"$exe" -version 2>&1 | grep 1.8.`
-                if [ -n "$version" ]; then
-                    dir=`dirname "$exe"`
-                    export JAVA_HOME=`dirname "$dir"`
-                    break
-                fi
+                export JAVA_HOME=`dirname "$dir"`
+                break
             fi
         done
     fi
 
-    # Look for JDK in Program Files.
+    # Look for JDK in PROGRAMFILES.
     if [ -z "$JAVA_HOME" ]; then
         IFS=$'\n'
-        for dir in `ls -1 "$java_root"`; do
-            if [[ "$dir" == jdk1.8.* ]]; then
-                export JAVA_HOME=$java_root\\$dir
+        for dir in `ls -1 "$java_root1"`; do
+            if [[ "$dir" == jdk* && -f "$java_root1/$dir/bin/javac.exe" ]]; then
+                export JAVA_HOME=$java_root1\\$dir
                 break
             fi
         done
     fi
 
     if [ -z "$JAVA_HOME" ]; then
-        echo -e "ERROR: The JAVA_HOME variable is not set, and JDK8 was not found in PATH or in the following locations:" >&2
+        IFS=$'\n'
+        for dir in `ls -1 "$java_root2"`; do
+            if [[ "$dir" == jdk* && -f "$java_root2/$dir/bin/javac.exe" ]]; then
+                export JAVA_HOME=$java_root2\\$dir
+                break
+            fi
+        done
+    fi
+
+    if [ -z "$JAVA_HOME" ]; then
+        echo -e "ERROR: The JAVA_HOME variable is not set, and JDK was not found in PATH or in the following locations:" >&2
         echo -e "    * $android_studio_jre" >&2
-        echo -e "    * $java_root" >&2
-        echo -e "\nPlease get OpenJDK8 from https://adoptopenjdk.net/ and try again." >&2
+        echo -e "    * $java_root1" >&2
+        echo -e "    * $java_root2" >&2
+        echo -e "\nPlease get OpenJDK from https://adoptium.net/ and try again." >&2
         exit 1
     else
-        echo "Found JDK8 at $JAVA_HOME"
+        echo "Found JDK at $JAVA_HOME"
     fi
 
 # Detect JAVA_HOME on Mac.
@@ -120,7 +128,7 @@ elif [[ "$IS_MAC" = 1 && -z "$JAVA_HOME" ]]; then
 
     if [ -f "$android_studio_jre/bin/java" ]; then
         export JAVA_HOME=$android_studio_jre
-        echo "Found JDK8 at $JAVA_HOME"
+        echo "Found JDK at $JAVA_HOME"
     fi
 
 # Detect JAVA_HOME on Linux.
@@ -129,7 +137,7 @@ elif [[ "$IS_LINUX" = 1 && -z "$JAVA_HOME" ]]; then
 
     if [ -f "$android_studio_jre/bin/java" ]; then
         export JAVA_HOME=$android_studio_jre
-        echo "Found JDK8 at $JAVA_HOME"
+        echo "Found JDK at $JAVA_HOME"
     fi
 fi
 
@@ -211,7 +219,6 @@ function sdkmanager-silent {
 
     if [ $? == 0 ]; then
         echo -e "\nERROR: Incompatible JDK version detected." >&2
-        echo -e "\nPlease note that JDK8 (not 9+) is required to install Android SDK. Get OpenJDK8 from https://adoptopenjdk.net/ and try again." >&2
         exit 1
     fi
 }
