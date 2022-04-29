@@ -1,7 +1,7 @@
 # This script will install the Android SDK and NDK, and tell Uno where they are found.
 
 CMAKE_VERSION="3.10.2.4988404"
-NDK_VERSION="21.0.6113669"
+NDK_VERSION="21.4.7075529"
 TOOLS_VERSION="7583922"
 
 # Begin script.
