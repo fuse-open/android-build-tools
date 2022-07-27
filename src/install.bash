@@ -221,6 +221,8 @@ function sdkmanager-silent {
         echo -e "\nERROR: Incompatible JDK version detected." >&2
         exit 1
     fi
+
+    rm ~/.android/sdkmanager.log
 }
 
 echo "Accepting licenses"
