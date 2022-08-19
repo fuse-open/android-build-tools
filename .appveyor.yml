@@ -14,5 +14,5 @@ test_script:
   # Check that we are able to install our package.
   - bash -c "npm install -g *.tgz"
   # Check that we are able to build an app.
-  # - npm install fuse-sdk -g
-  # - uno build android app
+  - npm install fuse-sdk -g
+  - uno build android app
