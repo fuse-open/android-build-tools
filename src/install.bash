@@ -1,7 +1,6 @@
-# This script will install the Android SDK and NDK, and tell Uno where they are found.
+# This script will install the Android SDK and tell Uno where it is found.
 
 CMAKE_VERSION="3.18.1"
-NDK_VERSION="22.1.7171670"
 TOOLS_VERSION="7583922"
 
 # Begin script.
@@ -65,8 +64,6 @@ function native-path {
         echo $1
     fi
 }
-
-NDK_DIR=`native-path $SDK_DIR/ndk/$NDK_VERSION`
 
 # Detect JAVA_HOME on Windows.
 if [[ "$IS_WINDOWS" = 1 && -z "$JAVA_HOME" ]]; then
@@ -234,12 +231,10 @@ function sdkmanager-install {
 }
 
 sdkmanager-install "cmake;$CMAKE_VERSION"
-sdkmanager-install "ndk;$NDK_VERSION"
 
 # Emit config file for Uno.
 node update-unoconfig.js \
     "Android.SDK.Directory: $SDK_DIR" \
-    "Android.NDK.Directory: $NDK_DIR" \
     "Java.JDK.Directory: $JAVA_HOME"
 
 echo -e "\n--- ~/.unoconfig --------------------------------------------------------------"

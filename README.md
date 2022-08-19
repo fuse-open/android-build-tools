@@ -6,9 +6,9 @@
 [![License: MIT](https://img.shields.io/github/license/fuse-open/android-build-tools.svg?style=flat-square)](LICENSE)
 ![Supported platforms](https://img.shields.io/badge/os-Linux%20%7C%20macOS%20%7C%20Windows-7F5AB6?style=flat-square)
 
-Android SDK and NDK installer for Uno and Fuse apps.
+Android SDK installer for Uno and Fuse apps.
 
-> Possibly useful in other scenarios where Android SDK and NDK are needed as well.
+> Possibly useful in other scenarios where the Android SDK is needed as well.
 
 > Visit [Fuse Open](https://fuseopen.com/) for more information about Uno and Fuse.
 
