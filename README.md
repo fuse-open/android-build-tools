@@ -22,6 +22,8 @@ $ npm install android-build-tools -g
 
 * Please note that [JDK](https://adoptium.net/) is required to install Android SDK. A compatible JDK is included with [Android Studio](https://developer.android.com/studio).
 
+* If you're using Fuse SDK v2.3 or lower, you should install `android-build-tools@1.x`.
+
 * If you're using Fuse SDK v1.12 or lower, you should install `android-build-tools@1.2.0`.
 
 ### SDK location
