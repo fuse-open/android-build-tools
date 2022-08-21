@@ -81,6 +81,7 @@ if [[ "$IS_WINDOWS" = 1 && -z "$JAVA_HOME" ]]; then
         IFS=$'\n'
         for exe in `where javac.exe 2>&1`; do
             if [ -f "$exe" ]; then
+                dir=`dirname "$exe"`
                 export JAVA_HOME=`dirname "$dir"`
                 break
             fi
