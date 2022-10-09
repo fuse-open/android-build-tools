@@ -1,6 +1,6 @@
 {
   "name": "android-build-tools",
-  "version": "1.8.2",
+  "version": "1.9.0",
   "description": "Android SDK and NDK installer for Uno and Fuse apps.",
   "dependencies": {
     "jdk-utils": "^0.4.4",
