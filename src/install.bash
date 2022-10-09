@@ -10,8 +10,7 @@ cd "`dirname "$SELF"`" || exit 1
 
 function fatal-error {
     echo -e "\nERROR: Install failed." >&2
-    echo -e "\nPlease read output for clues, or open an issue on GitHub (https://github.com/fuse-open/android-build-tools/issues)." >&2
-    echo -e "\nPlease note that JDK is required to install Android SDK. Get OpenJDK from https://adoptium.net/ and try again." >&2
+    echo -e "\nPlease read output for clues or report the issue at https://github.com/fuse-open/android-build-tools/issues\n" >&2
     exit 1
 }
 
@@ -68,92 +67,30 @@ function native-path {
 
 NDK_DIR=`native-path $SDK_DIR/ndk/$NDK_VERSION`
 
-# Detect JAVA_HOME on Windows.
-if [[ "$IS_WINDOWS" = 1 && -z "$JAVA_HOME" ]]; then
-    android_studio_jre=$PROGRAMFILES\\Android\\Android\ Studio\\jre
-    java_root1=$PROGRAMFILES\\Eclipse\ Adoptium
-    java_root2=$PROGRAMFILES\\Java
+# Detect JAVA_HOME.
+export JAVA_HOME=`node find-jdk.js`
 
-    # First, see if Android Studio has the JDK.
-    if [ -f "$android_studio_jre\\bin\\java.exe" ]; then
-        export JAVA_HOME=$android_studio_jre
-    fi
-
-    # Look for JDK in PATH.
-    if [ -z "$JAVA_HOME" ]; then
-        IFS=$'\n'
-        for exe in `where javac.exe 2>&1`; do
-            if [ -f "$exe" ]; then
-                dir=`dirname "$exe"`
-                export JAVA_HOME=`dirname "$dir"`
-                break
-            fi
-        done
-    fi
-
-    # Look for JDK in PROGRAMFILES.
-    if [ -z "$JAVA_HOME" ]; then
-        IFS=$'\n'
-        for dir in `ls -1 "$java_root1"`; do
-            if [[ "$dir" == jdk* && -f "$java_root1/$dir/bin/javac.exe" ]]; then
-                export JAVA_HOME=$java_root1\\$dir
-                break
-            fi
-        done
-    fi
-
-    if [ -z "$JAVA_HOME" ]; then
-        IFS=$'\n'
-        for dir in `ls -1 "$java_root2"`; do
-            if [[ "$dir" == jdk* && -f "$java_root2/$dir/bin/javac.exe" ]]; then
-                export JAVA_HOME=$java_root2\\$dir
-                break
-            fi
-        done
-    fi
-
-    if [ -z "$JAVA_HOME" ]; then
-        echo -e "ERROR: The JAVA_HOME variable is not set, and JDK was not found in PATH or in the following locations:" >&2
-        echo -e "    * $android_studio_jre" >&2
-        echo -e "    * $java_root1" >&2
-        echo -e "    * $java_root2" >&2
-        echo -e "\nPlease get OpenJDK from https://adoptium.net/ and try again." >&2
-        exit 1
-    else
-        echo "Found JDK at $JAVA_HOME"
-    fi
-
-# Detect JAVA_HOME on Mac.
-elif [[ "$IS_MAC" = 1 && -z "$JAVA_HOME" ]]; then
-    android_studio_jre=/Applications/Android\ Studio.app/Contents/jre/jdk/Contents/Home/jre
-
-    if [ -f "$android_studio_jre/bin/java" ]; then
-        export JAVA_HOME=$android_studio_jre
-        echo "Found JDK at $JAVA_HOME"
-    fi
-
-# Detect JAVA_HOME on Linux.
-elif [[ "$IS_LINUX" = 1 && -z "$JAVA_HOME" ]]; then
-    android_studio_jre=/opt/android-studio/jre
-
-    if [ -f "$android_studio_jre/bin/java" ]; then
-        export JAVA_HOME=$android_studio_jre
-        echo "Found JDK at $JAVA_HOME"
-    fi
+if [ -z "$JAVA_HOME" ]; then
+    node ls-jdk.js || :
+    echo -e "\nERROR: JDK 11 or higher was not found." >&2
+    echo -e "\nPlease get OpenJDK from https://adoptium.net/ and try again.\n" >&2
+    exit 1
+else
+    echo "Found JDK at $JAVA_HOME"
 fi
 
 # Make sure HOME is defined before invoking sdkmanager.
 if [[ "$IS_WINDOWS" != 1 && -z "$HOME" ]]; then
     echo -e "\nERROR: Your HOME variable is undefined." >&2
     echo -e "\nIf you're running with 'sudo', try running again from your user account without 'sudo'." >&2
-    echo -e "\nMore information: http://npm.github.io/installation-setup-docs/installing/a-note-on-permissions.html.\n" >&2
+    echo -e "\nMore information: http://npm.github.io/installation-setup-docs/installing/a-note-on-permissions.html\n" >&2
     exit 1
 fi
 
 # Download SDK.
 function download-error {
     echo -e "\nERROR: Download failed." >&2
-    echo -e "\nPlease try again later, or open an issue on GitHub (https://github.com/fuse-open/android-build-tools/issues)." >&2
+    echo -e "\nPlease try again later or report the issue at https://github.com/fuse-open/android-build-tools/issues\n" >&2
     exit 1
 }
 
