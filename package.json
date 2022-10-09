@@ -3,6 +3,7 @@
   "version": "2.0.0-beta.1",
   "description": "Android SDK installer for Uno and Fuse apps.",
   "dependencies": {
+    "jdk-utils": "^0.4.4",
     "xbash": "^1.6.0"
   },
   "devDependencies": {
