@@ -4,7 +4,7 @@
   "description": "Android SDK installer for Uno and Fuse apps.",
   "dependencies": {
     "decompress": "^4.2.1",
-    "jdk-utils": "^0.4.4",
+    "jdk-utils": "^0.5.0",
     "mkdirp": "^3.0.1",
     "nodejs-file-downloader": "^4.12.1",
     "pretty-bytes": "^5.6.0",
