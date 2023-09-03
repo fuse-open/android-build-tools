@@ -11,6 +11,7 @@
     "rimraf": "^5.0.1",
     "touch": "^3.1.0"
   },
+  "main": "src/index.js",
   "scripts": {
     "install": "node src/install.js"
   },
