@@ -9,6 +9,7 @@
     "nodejs-file-downloader": "^4.12.1",
     "pretty-bytes": "^5.6.0",
     "rimraf": "^5.0.1",
+    "sudo-block": "^3.0.0",
     "touch": "^3.1.0"
   },
   "main": "src/index.js",

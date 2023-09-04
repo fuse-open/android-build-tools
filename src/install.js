@@ -5,6 +5,7 @@ const mkdirp = require("mkdirp")
 const touch = require("touch")
 const rimraf = require("rimraf")
 const decompress = require("decompress")
+const sudoBlock = require("sudo-block")
 const {
     isNullOrEmpty,
     toolsUrl,
@@ -96,6 +97,7 @@ async function downloadTools() {
 }
 
 async function main() {
+    sudoBlock()
     const javaHome = await findJdkHome()
 
     if (isNullOrEmpty(javaHome)) {
@@ -109,14 +111,6 @@ async function main() {
 
     // Export JAVA_HOME for sdkmanager
     process.env.JAVA_HOME = javaHome
-
-    // Make sure HOME is defined before invoking sdkmanager
-    if (!isWindows && isNullOrEmpty(process.env.HOME)) {
-        console.error("\nERROR: Your HOME variable is undefined")
-        console.error("\nIf you're running with 'sudo', try running again from your user account without 'sudo'.")
-        console.error("\nMore information: http://npm.github.io/installation-setup-docs/installing/a-note-on-permissions.html\n")
-        process.exit(1)
-    }
 
     await downloadTools()
 
