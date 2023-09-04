@@ -140,9 +140,12 @@ async function main() {
         console.error("\nERROR: JDK 11 or higher was not found")
         console.error("\nPlease get OpenJDK from https://adoptium.net/ and try again.\n")
         process.exit(1)
-    } else {
-        console.log(`Found JDK at ${javaHome}`)
     }
+
+    console.log(`Found JDK at ${javaHome}`)
+
+    // Export JAVA_HOME for sdkmanager
+    process.env.JAVA_HOME = javaHome
 
     // Make sure HOME is defined before invoking sdkmanager
     if (!isWindows && isNullOrEmpty(process.env.HOME)) {
