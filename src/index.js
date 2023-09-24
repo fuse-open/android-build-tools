@@ -77,7 +77,9 @@ switch (process.platform) {
 
 async function findJdkHome() {
     const runtimes = await jdkUtils.findRuntimes({checkJavac: true, withVersion: true, withTags: true})
-    const result = getBestRuntime(runtimes.filter(rt => rt.hasJavac && rt.version && rt.version.major >= 11))
+
+    // Require JDK 17 or better (Gradle 8.0)
+    const result = getBestRuntime(runtimes.filter(rt => rt.hasJavac && rt.version && rt.version.major >= 17))
 
     if (result) {
         return result.homedir
