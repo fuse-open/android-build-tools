@@ -20,7 +20,7 @@ $ npm install android-build-tools -g
 
 > This package is suitable for Linux, macOS and Windows (64-bit).
 
-* Please note that [JDK 11](https://adoptium.net/) is recommended to install Android SDK.
+* Please note that [JDK 17](https://adoptium.net/) is recommended to install Android SDK.
 
 * If you're using Fuse SDK v2.3 or lower, you should install `android-build-tools@1.x`.
 
