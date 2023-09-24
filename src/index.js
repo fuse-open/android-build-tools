@@ -77,14 +77,7 @@ switch (process.platform) {
 
 async function findJdkHome() {
     const runtimes = await jdkUtils.findRuntimes({checkJavac: true, withVersion: true, withTags: true})
-
-    // Prefer JDK 11 for Android Development
-    let result = getBestRuntime(runtimes.filter(rt => rt.hasJavac && rt.version && rt.version.major === 11))
-
-    if (!result) {
-        // See if a higher JDK version is available
-        result = getBestRuntime(runtimes.filter(rt => rt.hasJavac && rt.version && rt.version.major > 11))
-    }
+    const result = getBestRuntime(runtimes.filter(rt => rt.hasJavac && rt.version && rt.version.major >= 11))
 
     if (result) {
         return result.homedir
@@ -105,7 +98,16 @@ async function findJdkHome() {
             return isInPathEnv[0]
         }
 
+        const isAndroidStudio = runtimes.filter(rt => rt.homedir.includes("Android Studio"))
+
+        // Prefer JDK that is included with Android Studio
+        if (isAndroidStudio.length !== 0) {
+            return isAndroidStudio[0]
+        }
+
         if (runtimes.length !== 0) {
+            // Prefer biggest major version
+            runtimes.sort((a, b) => b.version.major - a.version.major)
             return runtimes[0]
         }
     }

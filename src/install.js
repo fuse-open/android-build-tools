@@ -146,4 +146,7 @@ async function main() {
     console.log("-------------------------------------------------------------------------------")
 }
 
-main()
+main().catch(reason => {
+    console.error(reason)
+    fatalError()
+})
