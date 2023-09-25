@@ -139,10 +139,10 @@ async function main() {
     // Emit config file for Uno
     const unoconfig = path.join(os.homedir(), ".unoconfig")
 
-    updateUnoconfig(unoconfig, [
-        `Android.SDK.Directory: ${sdkDir}`,
-        `Java.JDK.Directory: ${javaHome}`
-    ])
+    updateUnoconfig(unoconfig, {
+        "Android.SDK.Directory": sdkDir,
+        "Java.JDK.Directory": javaHome,
+    })
 
     console.log()
     console.log("--- ~/.unoconfig --------------------------------------------------------------")

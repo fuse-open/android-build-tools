@@ -190,14 +190,7 @@ async function install(package, version) {
     await sdkmanager([`${package};${version}`])
 }
 
-function updateUnoconfig(filename, args) {
-    const obj = {}
-
-    for (let i = 0; i < args.length; i++) {
-        const colon = args[i].indexOf(":")
-        obj[args[i].substring(0, colon)] = args[i].substring(colon + 1).trim()
-    }
-
+function updateUnoconfig(filename, obj) {
     const lines = fs.existsSync(filename)
         ? fs.readFileSync(filename, "utf8").trim().split(/\n|\r\n/)
         : []
