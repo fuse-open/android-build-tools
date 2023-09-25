@@ -38,6 +38,11 @@ The SDK is installed to one of the locations below. The installer will only down
 
 > On Windows, if your user name or `%LOCALAPPDATA%` contain non-ASCII characters, the SDK is installed to `%PROGRAMDATA%\Android\sdk` instead. This is because we get build errors if the SDK location contains non-ASCII characters.
 
+### Changes since 1.x
+
+* Requiring minimum [JDK 17](https://adoptium.net/) for Gradle 8.0 support.
+* No longer installing a specific version of NDK. The right version will be installed when running Gradle.
+
 ### Related packages
 
 * [fuse-sdk](https://www.npmjs.com/package/fuse-sdk)

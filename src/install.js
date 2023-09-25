@@ -22,11 +22,15 @@ const {
 
 const CMAKE_VERSION = "3.18.1"
 
-process.on("uncaughtException", (err, origin) => {
-    console.error(err, origin)
+function fatalError() {
     console.error("\nERROR: Install failed")
     console.error("\nPlease read output for clues or report the issue at https://github.com/fuse-open/android-build-tools/issues\n")
     process.exit(1)
+}
+
+process.on("uncaughtException", (err, origin) => {
+    console.error(err, origin)
+    fatalError()
 })
 
 function permissionError(destination) {
@@ -100,7 +104,7 @@ async function main() {
 
     if (isNullOrEmpty(javaHome)) {
         printJdkLocations()
-        console.error("\nERROR: JDK 11 or higher was not found")
+        console.error("\nERROR: JDK 17 or higher was not found")
         console.error("\nPlease get OpenJDK from https://adoptium.net/ and try again.\n")
         process.exit(1)
     }
