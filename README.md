@@ -2,7 +2,7 @@
 
 [![AppVeyor build status](https://img.shields.io/appveyor/ci/mortend/android-build-tools/master.svg?logo=appveyor&logoColor=silver&style=flat-square)](https://ci.appveyor.com/project/mortend/android-build-tools/branch/master)
 [![NPM package](https://img.shields.io/npm/v/android-build-tools.svg?style=flat-square)](https://www.npmjs.com/package/android-build-tools)
-[![NPM downloads](https://img.shields.io/npm/dt/android-build-tools?color=blue&style=flat-square)](https://www.npmjs.com/package/dotnet-run)
+[![NPM downloads](https://img.shields.io/npm/dt/android-build-tools?color=blue&style=flat-square)](https://www.npmjs.com/package/android-build-tools)
 [![License: MIT](https://img.shields.io/github/license/fuse-open/android-build-tools.svg?style=flat-square)](LICENSE)
 ![Supported platforms](https://img.shields.io/badge/os-Linux%20%7C%20macOS%20%7C%20Windows-7F5AB6?style=flat-square)
 
@@ -20,15 +20,20 @@ $ npm install android-build-tools -g
 
 > This package is suitable for Linux, macOS and Windows (64-bit).
 
-* Please note that [JDK 17](https://adoptium.net/) is recommended to install Android SDK.
+* Please note that [JDK 17](https://adoptium.net/) is required to install Android SDK.
 
 * If you're using Fuse SDK v2.3 or lower, you should install `android-build-tools@1.x`.
 
 * If you're using Fuse SDK v1.12 or lower, you should install `android-build-tools@1.2.0`.
 
+### Changes since 1.x
+
+* Requiring minimum [JDK 17](https://adoptium.net/) for Gradle 8.0 support.
+* No longer installing a specific version of NDK. The right version will be installed when running Gradle.
+
 ### SDK location
 
-The SDK is installed to one of the locations below. The installer will only download the SDK or additional components when something is missing.
+The SDK is installed to one of the locations below.
 
 | Host OS  | Location                      |
 |:---------|:------------------------------|
@@ -37,11 +42,6 @@ The SDK is installed to one of the locations below. The installer will only down
 | Windows  | `%LOCALAPPDATA%\Android\sdk`  |
 
 > On Windows, if your user name or `%LOCALAPPDATA%` contain non-ASCII characters, the SDK is installed to `%PROGRAMDATA%\Android\sdk` instead. This is because we get build errors if the SDK location contains non-ASCII characters.
-
-### Changes since 1.x
-
-* Requiring minimum [JDK 17](https://adoptium.net/) for Gradle 8.0 support.
-* No longer installing a specific version of NDK. The right version will be installed when running Gradle.
 
 ### Related packages
 
