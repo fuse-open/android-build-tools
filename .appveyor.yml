@@ -5,15 +5,15 @@ environment:
   GRADLE_OPTS: -Dorg.gradle.daemon=false
 
 build_script:
-  - npm install
   - npm pack --silent
 
 artifacts:
   - path: '*.tgz'
 
 test_script:
-  # Check that we are able to install our package.
+  # Check that we are able to install our package
   - bash -c "npm install -g *.tgz"
-  # Check that we are able to build an app.
+  - android-build-tools
+  # Check that we are able to build an app
   - npm install fuse-sdk -g
   - uno build android app

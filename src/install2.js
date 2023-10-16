@@ -1,0 +1,1 @@
+console.log("Please run `npx android-build-tools` to install Android SDK tools")

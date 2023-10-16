@@ -12,8 +12,12 @@
     "touch": "^3.1.0"
   },
   "main": "src/index.js",
+  "bin": {
+    "android-build-tools": "src/install.js"
+  },
   "scripts": {
-    "install": "node src/install.js"
+    "cli": "node src/install.js",
+    "install": "node src/install2.js"
   },
   "files": [
     "src/*"

@@ -15,7 +15,7 @@ Android SDK installer for Uno and Fuse apps.
 ## Install
 
 ```
-$ npm install android-build-tools -g
+$ npx android-build-tools
 ```
 
 > This package is suitable for Linux, macOS and Windows (64-bit).
