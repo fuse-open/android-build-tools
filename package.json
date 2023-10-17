@@ -13,10 +13,10 @@
   },
   "main": "src/index.js",
   "bin": {
-    "android-build-tools": "src/install.js"
+    "android-build-tools": "src/cli.js"
   },
   "scripts": {
-    "cli": "node src/install.js",
+    "cli": "node src/cli.js",
     "install": "node src/install2.js"
   },
   "files": [
