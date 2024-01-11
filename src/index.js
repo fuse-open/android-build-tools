@@ -79,14 +79,14 @@ async function findJdkHome() {
     const runtimes = await jdkUtils.findRuntimes({checkJavac: true, withVersion: true, withTags: true})
 
     // Prefer JDK 17 or better (Gradle 8.x)
-    const result = getBestRuntime(runtimes.filter(rt => rt.hasJavac && rt.version && rt.version.major >= 17))
+    const result = getBestRuntime(runtimes.filter(rt => rt.hasJavac && rt.version && rt.version.major >= 17 && rt.version.major <= 19))
 
     if (result) {
         return result.homedir
     }
 
     // Fallback to JDK 11 or better (Gradle 7.x)
-    const result2 = getBestRuntime(runtimes.filter(rt => rt.hasJavac && rt.version && rt.version.major >= 11))
+    const result2 = getBestRuntime(runtimes.filter(rt => rt.hasJavac && rt.version && rt.version.major >= 11 && rt.version.major <= 19))
 
     if (result2) {
         console.error("WARNING: JDK 17 is recommended for Android development, but was not found. Some features will not work")
