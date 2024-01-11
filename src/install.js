@@ -99,7 +99,7 @@ async function main() {
     // Detect JAVA_HOME
     async function findJdkHome() {
         const runtimes = await jdkUtils.findRuntimes({checkJavac: true, withVersion: true, withTags: true})
-        const result = getBestRuntime(runtimes.filter(rt => rt.hasJavac && rt.version && rt.version.major >= 11))
+        const result = getBestRuntime(runtimes.filter(rt => rt.hasJavac && rt.version && rt.version.major >= 11 && rt.version.major <= 19))
 
         if (result) {
             return result.homedir
