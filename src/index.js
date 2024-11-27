@@ -8,7 +8,7 @@ const prettyBytes = require("pretty-bytes")
 const readline = require("readline")
 
 // Config
-const TOOLS_VERSION = "10406996"
+const TOOLS_VERSION = "11076708"
 
 /** Returns false if the string contains non-ASCII characters */
 function isAscii(string) {
